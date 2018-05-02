@@ -1,0 +1,53 @@
+*{
+  margin:0;
+  padding:0;
+    li{
+    list-style: none;
+  }
+}
+.px2rem(@name,@px){
+    @{name}:@px/100rem;
+}
+body{
+  .px2rem(font-size,20);
+}
+.header{
+  width: 100%;
+  position: fixed;
+  left:0;
+  top:0;
+  .px2rem(height,50);
+  .px2rem(line-height,50);
+  background: red;
+  h1{
+    text-align: center;
+  }
+}
+
+.menu{
+  .px2rem(width,80);
+  height:100%;
+  position: fixed;
+  left:0;
+  .px2rem(top,50);
+  background: #dddddd;
+  li{
+    .px2rem(padding-left,10);
+    .px2rem(height,60);
+    .px2rem(line-height,60);
+    cursor: pointer;
+    background: cadetblue;
+    &:hover{
+      background:#666666;
+    }
+    &.active{
+      background: brown;
+    }
+  }
+}
+
+.content{
+  .px2rem(margin-left,100);
+  .px2rem(margin-top,60);
+  background: azure;
+}

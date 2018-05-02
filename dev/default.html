@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angularJs路由搭建</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/page2.css">
+    <!--<script type="text/javascript" src="lib/angular/angular.min.js"></script>-->
+    <!--<script type="text/javascript" src="lib/angular/angular-ui-router.min.js"></script>-->
+    <!--<script type="text/javascript" src="js/default.js"></script>-->
+    <script type="text/javascript">
+        (function (doc, win) {
+
+            var docEl = doc.documentElement,
+                resizeEvent = 'orientationchange' in win ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    clientWidth = clientWidth > 1920 ? 1920 : clientWidth <= 1024 ? 1024 : clientWidth;
+                    docEl.style.fontSize = (clientWidth / 19.2) + 'px';
+                };
+
+            var domReady = function (callback) {
+
+                if (!doc.addEventListener) {
+
+                    var _interval = setInterval(function () {
+                        try {
+                            docEl.doScroll();
+                            clearInterval(_interval);
+                            callback();
+                        } catch (e) {
+                        }
+                    }, 1);
+
+                } else {
+                    doc.addEventListener('DOMContentLoaded', callback, false);
+                }
+
+            };
+
+            if (!doc.addEventListener) {
+                win.attachEvent('on' + resizeEvent, recalc);
+            } else {
+                win.addEventListener(resizeEvent, recalc, false);
+            }
+            domReady(recalc);
+
+
+            /**
+             * 保证default.html下载后窗口resize时就可以reload
+             *避免快速频繁切换窗口后页面不进行reload
+             * */
+            (function () {
+
+                var utls = {
+                    w: function () {
+                        return win.innerWidth || (doc.documentElement && doc.documentElement.clientWidth) || doc.body.clientWidth;
+                    },
+                    h: function () {
+                        return win.innerHeight || (doc.documentElement && doc.documentElement.clientHeight) || doc.body.clientHeight;
+                    }
+                };
+
+                var initBrowSize = {
+                        w: utls.w(),
+                        h: utls.h()
+                    },
+                    resizeId = null;
+                scrollWidth = 22;
+
+                if ((/MSIE\s[6-8]/).test(navigator.userAgent)) {
+                    window.onresize = function (e) {
+                        clearTimeout(resizeId);
+                        resizeId = setTimeout(function () {
+                            // resize要考虑滚动条，避免循环出发resize事件
+                            if (Math.abs(utls.h() - initBrowSize.h) > scrollWidth || Math.abs(utls.w() - initBrowSize.w) > scrollWidth) {
+                                location.reload();
+                            }
+                        }, 200)
+                    }
+                }
+            })();
+
+        })(document, window)
+    </script>
+</head>
+<body>
+<div class="header" ui-view='header'></div>
+<div class="menu" ui-view='menu'></div>
+<div class="content" ui-view='content'></div>
+</body>
+<script data-main="js/main" src="js/lib/require/require.js"></script>
+</html>
