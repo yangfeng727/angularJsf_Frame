@@ -5,6 +5,7 @@ var gulp = require('gulp'),
     minifyCss= require('gulp-minify-css'),//压缩css插件
     htmlmin = require('gulp-htmlmin'),//压缩html插件
     less = require("gulp-less"),//less
+    plumber = require("gulp-plumber"),//less报错继续处理不中断
     webserver = require('gulp-webserver'),//livereload
     notify=require('gulp-notify'),   //提示
     del=require('del');// 删除
@@ -43,16 +44,12 @@ gulp.task('js', function () {
         //     ie8:true,// 默认不支持
         // }))
         .pipe(gulp.dest(resDist))
-        // .pipe(notify({message:'js task ok'}));
-        // .pipe(connect.reload())
 });
 
 //copy js中的依赖包lib/** 的文件
 gulp.task('jsCopy', function () {
     return  gulp.src(jsLib)
         .pipe(gulp.dest(jsLibDist))
-        // .pipe(notify({message:'js copy task ok'}));
-    // .pipe(connect.reload())
 });
 
 //定义html任务
@@ -69,9 +66,7 @@ gulp.task('html', function () {
     };
    var stream = gulp.src(htmlSrc)
         .pipe(htmlmin(options))
-        .pipe(gulp.dest(resDist))
-        // .pipe(notify({message:'html task ok'}));
-        // .pipe(connect.reload());
+        .pipe(gulp.dest(resDist));
 
     return stream;
 });
@@ -103,8 +98,9 @@ gulp.task('webServer', function() {
 // 定义开发时的less任务
 gulp.task('less', function() {
     gulp.src(lessSrc)
+        .pipe( plumber() )
         .pipe(less())
-        .pipe(gulp.dest('./dev/css/*.css'));
+        .pipe(gulp.dest('./dev/css/'));
 });
 
 //定义开发看守任务

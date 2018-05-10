@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+* li {
+  list-style: none;
+}
+body {
+  font-size: 0.2rem;
+}
+.header {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 0.5rem;
+  line-height: 0.5rem;
+  background: red;
+}
+.header h1 {
+  text-align: center;
+}
+.menu {
+  width: 0.8rem;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0.5rem;
+  background: #dddddd;
+}
+.menu li {
+  padding-left: 0.1rem;
+  height: 0.6rem;
+  line-height: 0.6rem;
+  cursor: pointer;
+  background: cadetblue;
+}
+.menu li:hover {
+  background: #666666;
+}
+.menu li.active {
+  background: brown;
+}
+.content {
+  margin-left: 1rem;
+  margin-top: 0.6rem;
+  background: azure;
+}

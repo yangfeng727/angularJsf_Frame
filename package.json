@@ -7,7 +7,7 @@
     "start": "gulp",
     "build": "gulp build",
     "server": "gulp webServer",
-    "gulpLess":"gulp watchLess"
+    "gulpLess": "gulp watchLess"
   },
   "author": "yangfeng",
   "license": "ISC",
@@ -20,6 +20,7 @@
     "gulp-minify": "^2.1.0",
     "gulp-minify-css": "^1.2.4",
     "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.0",
     "gulp-uglify": "^3.0.0",
     "gulp-webserver": "^0.9.1",
     "run-sequence": "^2.2.1"
