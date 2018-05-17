@@ -10,11 +10,11 @@ var gulp = require('gulp'),
     notify=require('gulp-notify'),   //提示
     del=require('del');// 删除
 
-var jsSrc = ['./dev/**/*.js','!./dev/js/lib/**/*.js'];
+var jsSrc = './dev/js/**/*.js';
 var cssSrc = './dev/**/*.css';
 var htmlSrc = './dev/**/*.html';
 var resDist = './dist';
-
+var jsDist= resDist+'/js';
 var lessSrc='./dev/css/less/*.less';
 
 var jsLib='./dev/js/lib/**/*.js';
@@ -40,17 +40,17 @@ gulp.task('css', function () {
 //定义名为js的任务
 gulp.task('js', function () {
     return gulp.src(jsSrc)
-        // .pipe(uglify({
-        //     ie8:true,// 默认不支持
-        // }))
-        .pipe(gulp.dest(resDist))
+        .pipe(uglify({
+            ie8:true,// 默认不支持
+        }))
+        .pipe(gulp.dest(jsDist))
 });
 
-//copy js中的依赖包lib/** 的文件
-gulp.task('jsCopy', function () {
-    return  gulp.src(jsLib)
-        .pipe(gulp.dest(jsLibDist))
-});
+// //copy js中的依赖包lib/** 的文件
+// gulp.task('jsCopy', function () {
+//     return  gulp.src(jsLib)
+//         .pipe(gulp.dest(jsLibDist))
+// });
 
 //定义html任务
 gulp.task('html', function () {
@@ -76,7 +76,7 @@ gulp.task('html', function () {
 gulp.task('build', function (callback) {
 
     runSequence('clean:dist',
-        ['css', 'js', 'jsCopy', 'html'],
+        ['css', 'js', 'html'],
         callback);
 
   // gulp.pipe(notify({message:'build task ok'}));

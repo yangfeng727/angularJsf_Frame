@@ -33,8 +33,14 @@
         angular.bootstrap(document.body, ['myApp']);
 
         // 页面echarts resize
+        var timer;
         $(window).resize(function () {
-            setTimeout(function () {
+
+            if(timer){
+                clearTimeout(timer);
+                timer=null;
+            }
+            timer=setTimeout(function () {
                 layout.resizeCharts();
             },500)
         });
