@@ -42,6 +42,7 @@ gulp.task('js', function () {
     return gulp.src(jsSrc)
         .pipe(uglify({
             ie8:true,// 默认不支持
+            mangle:false
         }))
         .pipe(gulp.dest(jsDist))
 });
