@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),//压缩js插件
     minifyCss= require('gulp-minify-css'),//压缩css插件
     htmlmin = require('gulp-htmlmin'),//压缩html插件
+    imageMin = require('gulp-imagemin'),// 压缩图片
     less = require("gulp-less"),//less
     plumber = require("gulp-plumber"),//less报错继续处理不中断
     webserver = require('gulp-webserver'),//livereload
@@ -13,8 +14,10 @@ var gulp = require('gulp'),
 var jsSrc = './dev/js/**/*.js';
 var cssSrc = './dev/**/*.css';
 var htmlSrc = './dev/**/*.html';
+var imgSrc='./dev/images/**/*.*';
 var resDist = './dist';
 var jsDist= resDist+'/js';
+var imgDist=resDist+'/images';
 var lessSrc='./dev/css/less/*.less';
 
 var jsLib='./dev/js/lib/**/*.js';
@@ -47,6 +50,11 @@ gulp.task('js', function () {
         .pipe(gulp.dest(jsDist))
 });
 
+gulp.task('image',function(){
+    gulp.src(imgSrc)
+        .pipe(imageMin({progressive: true}))
+        .pipe(gulp.dest(imgDist))
+});
 // //copy js中的依赖包lib/** 的文件
 // gulp.task('jsCopy', function () {
 //     return  gulp.src(jsLib)
@@ -77,7 +85,7 @@ gulp.task('html', function () {
 gulp.task('build', function (callback) {
 
     runSequence('clean:dist',
-        ['css', 'js', 'html'],
+        ['css', 'js', 'html','image'],
         callback);
 
   // gulp.pipe(notify({message:'build task ok'}));
