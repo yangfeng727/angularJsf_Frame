@@ -2,7 +2,8 @@
 ===========
 *1.安装nodejs
 *2.根目录运行npm i安装依赖
-*3.运行npm run server
+*3.运行npm i gulp -g
+*4.运行npm run server
 
 常用命令
 ===========
