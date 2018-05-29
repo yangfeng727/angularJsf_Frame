@@ -46,3 +46,8 @@ body {
   margin-top: 0.6rem;
   background: azure;
 }
+.font-elipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
