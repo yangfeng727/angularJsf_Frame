@@ -2,6 +2,7 @@
 var gulp = require('gulp'),
     runSequence = require('run-sequence'),// 按顺序逐个同步地运行 Gulp
     uglify = require('gulp-uglify'),//压缩js插件
+    ngAnnotate = require('gulp-ng-annotate'),//angularjs module想采用缩写，则加上gulp-ng-annotate这个插件，用gulp-ng-annotate添加ANGLARJS依赖注入注解
     minifyCss= require('gulp-minify-css'),//压缩css插件
     htmlmin = require('gulp-htmlmin'),//压缩html插件
     imageMin = require('gulp-imagemin'),// 压缩图片
@@ -43,9 +44,10 @@ gulp.task('css', function () {
 //定义名为js的任务
 gulp.task('js', function () {
     return gulp.src(jsSrc)
+        .pipe(ngAnnotate())
         .pipe(uglify({
             ie8:true,// 默认不支持
-            mangle:false
+            mangle:true // 混淆，默认true
         }))
         .pipe(gulp.dest(jsDist))
 });
