@@ -12,6 +12,8 @@ var gulp = require('gulp'),
     notify=require('gulp-notify'),   //提示
     del=require('del');// 删除
 
+var server=require('./server');
+
 var jsSrc = './dev/js/**/*.js';
 var cssSrc = './dev/**/*.css';
 var htmlSrc = './dev/**/*.html';
@@ -95,15 +97,21 @@ gulp.task('build', function (callback) {
 
 // 定义livereload任务
 gulp.task('webServer', function() {
-    gulp.src('dev')
-        .pipe(webserver({
-            port:8091,
-            // enable:true,
-            livereload: true,
-            directoryListing: false,// 显示目录
-            open: true,// 默认打开网页
-            fallback: 'default.html'
-        }));
+    var port='8091';
+    // 跨域解决
+    server.start(port);
+
+    // server.start2(port);
+
+    // gulp.src('dev')
+    //     .pipe(webserver({
+    //         port:port,
+    //         // enable:true,
+    //         livereload: true,
+    //         directoryListing: false,// 显示目录
+    //         open: true,// 默认打开网页
+    //         fallback: 'default.html'
+    //     }));
 });
 
 // 定义开发时的less任务

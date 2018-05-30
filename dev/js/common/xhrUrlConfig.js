@@ -1,12 +1,10 @@
 ;define(function () {
    var _domain = location.protocol + '//' +location.host;
-   var appName = 'sa-web';
-   var commonUrl=_domain + '/' + appName + '/action/';
 
    return {
        action:{
-           login:{
-               test1:commonUrl+'XXXX'
+           test:{
+               test1:_domain+'/s8460049/article/GetRelatedArticles?pageindex=2&articleId=51995857' // 跨域测试的接口
            }
        }
    }
