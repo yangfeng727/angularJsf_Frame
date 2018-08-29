@@ -28,26 +28,61 @@
                 }
             },
             legend: {
-                data:['销量']
+                data:['销量','zhengliang']
             },
             xAxis: {
+                triggerEvent:true,
                 data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
             },
             yAxis: {},
             series: [{
                 name: '销量',
                 type: 'bar',
-                data: [0, 20, 36, 10, 10, 20]
+                data: [{
+                    value:10,
+                    name:'我是数据ddd',
+                    id:'aaaaa'
+                }, 20, 36, 10, 10, 20]
+            },{
+                name: 'zhengliang',
+                type: 'bar',
+                data: [{
+                    value:20,
+                    name:'我是数据bbb',
+                    id:'bbb'
+                }, 10, 36, 10, 10, 5]
             }]
         };
         myChart.setOption(option);
-        $('#'+idD).off('click').on('click',function () {
-            console.log(variable)
+
+
+        // 柱状图和x轴的点击
+        myChart.on('click',function(params){
+            if(params.componentType == "xAxis"){
+                console.log("单击了"+params.value+"x轴标签");
+            }else{
+                console.log("单击了"+params.name+"柱状图");
+            }
         });
-        // myChart.on('click',function(param){
-        //     console.log(param.name)
+
+        //图例的点击
+        myChart.on('legendselectchanged',function(param){
+            console.log(param,222)
+        });
+
+        // $('#'+idD).off('click').on('click',function () {
+        //     console.log(variable)
         // });
 
+        // myChart.dispatchAction({
+        //     type: 'legendselected',
+        //     // // 选中的图例名称
+        //     // name: string
+        //     // // 所有图例的选中状态表
+        //     selected: function (param) {
+        //         console.log(param)
+        //     }
+        // })
         // echarts tooltip 轮播
         window.GLOBAL.toolTipLunBoAll(myChart);
     };
