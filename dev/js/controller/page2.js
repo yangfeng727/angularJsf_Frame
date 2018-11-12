@@ -35,6 +35,19 @@
                 data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
             },
             yAxis: {},
+            animation:function () {
+                myChart.on('finished',function(params){
+                    console.log('finished',2222222)
+                });
+                return true;
+            },
+            animationDuration:function (idx) {
+                myChart.on('finished',function(params){
+                    console.log('finished',2222222)
+                });
+                // console.log('animationDuration',idx)
+                return idx*100;
+            },
             series: [{
                 name: '销量',
                 type: 'bar',
@@ -63,6 +76,10 @@
             }else{
                 console.log("单击了"+params.name+"柱状图");
             }
+        });
+
+        myChart.on('finished',function(params){
+          console.log('finished',2222222)
         });
 
         //图例的点击
