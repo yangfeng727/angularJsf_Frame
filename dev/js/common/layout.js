@@ -1,4 +1,4 @@
-;define(['echarts','jquery'],function (echarts,$) {
+;define(['echarts'], function (echarts, $) {
     // 使用严格模式
     'use strict';
 
@@ -7,13 +7,14 @@
         /**
          * 页面echarts resie
          * */
-        resizeCharts:function () {
-            var $echartsDoms=$('.v-box [_echarts_instance_]'),
-                einstance=null;
+        resizeCharts: function () {
+            // var $echartsDoms=$('.v-box [_echarts_instance_]'),
+            var $echartsDoms = document.querySelectorAll('.v-box [_echarts_instance_]'),
+                einstance = null;
 
-            for(var i=0,len=$echartsDoms.length;i<len;i++){
-                einstance=echarts.getInstanceByDom($echartsDoms[i]);
-                if(einstance && einstance.resize){
+            for (var i = 0, len = $echartsDoms.length; i < len; i++) {
+                einstance = echarts.getInstanceByDom($echartsDoms[i]);
+                if (einstance && einstance.resize) {
                     einstance.resize();
                 }
             }
